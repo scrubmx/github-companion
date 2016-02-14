@@ -1,0 +1,29 @@
+{
+  "name": "Github Companion",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Adds improved functionality to github.com",
+  "homepage_url": "https://github.com/scrubmx/github-companion",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "https://github.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "js/jquery/jquery.min.js"
+      ]
+    }
+  ]
+}
