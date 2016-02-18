@@ -1,5 +1,5 @@
 {
-  "name": "Github Companion",
+  "name": "GitHub Companion",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Adds improved functionality to github.com",
@@ -21,8 +21,8 @@
         "https://github.com/*"
       ],
       "js": [
-        "src/inject/inject.js",
-        "js/jquery/jquery.min.js"
+        "src/github-companion.js",
+        "src/vendor/jquery-2.2.0.min.js"
       ]
     }
   ]

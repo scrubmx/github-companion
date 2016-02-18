@@ -13,9 +13,10 @@ chrome.extension.sendMessage({}, response => {
                 class: 'btn btn-sm git-companion__toggle-blob-wrapper'
             });
 
+            // Add a button to each file-actions container.
             $(".file-actions .btn:contains('View')").before(toggleButton);
 
-            // Attach event listener to the buttons
+            // Attach event listener to the buttons.
             $('.git-companion__toggle-blob-wrapper').click(event => {
                 let $button = $(event.target);
 
