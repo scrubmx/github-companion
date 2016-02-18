@@ -1,31 +1,33 @@
-chrome.extension.sendMessage({}, function(response) {
-    var readyStateCheckInterval = setInterval(function() {
-        if (document.readyState === "complete") {
-            clearInterval(readyStateCheckInterval);
+'use strict';
 
-            // This part of the script triggers when page is done loading
-            console.log("Hello. This message was sent from scripts/inject.js");
+chrome.extension.sendMessage({}, response => {
 
-            (function($){
-                var newToggleButton = function () {
-                    return $('<button>', {
-                        'text': 'Collapse',
-                        'aria-label': 'Expand or collapse this file',
-                        'class': 'btn btn-sm tooltipped tooltipped-nw GitCompanion__toggle-blob-wrapper'
-                    })
-                };
+    let readyStateCheck = setInterval(() => {
 
-                $('.file-actions').map(function(index, el){
-                    $(el).find('.btn').before(newToggleButton);
-                });
+        (function($) {
 
-                $('.GitCompanion__toggle-blob-wrapper').click(function() {
-                    $this = $(this);
-                    $this.text($this.text() === 'Expand' ? 'Collapse' : 'Expand');
-                    $this.closest('.file-header').next('.blob-wrapper, .render-wrapper').toggle();
-                });
-            })(jQuery);
+            clearInterval(readyStateCheck);
 
-        }
+            let toggleButton = $('<button>', {
+                text: 'Collapse',
+                class: 'btn btn-sm git-companion__toggle-blob-wrapper'
+            });
+
+            $(".file-actions .btn:contains('View')").before(toggleButton);
+
+            // Attach event listener to the buttons
+            $('.git-companion__toggle-blob-wrapper').click(event => {
+                let $button = $(event.target);
+
+                // Toggle the text between 'Expand' and 'Collapse'.
+                $button.text($button.text() === 'Expand' ? 'Collapse' : 'Expand');
+
+                // Toggle the content or media container.
+                $button.closest('.file-header').next('.blob-wrapper, .render-wrapper').toggle();
+            });
+
+        })(jQuery);
+
     }, 10);
+
 });
