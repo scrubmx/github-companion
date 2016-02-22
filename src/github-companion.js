@@ -1,34 +1,24 @@
-'use strict';
+(function($) {
 
-chrome.extension.sendMessage({}, response => {
+    'use strict';
 
-    let readyStateCheck = setInterval(() => {
+    let toggleButton = $('<button>', {
+        text: 'Collapse',
+        class: 'btn btn-sm git-companion__toggle-blob-wrapper'
+    });
 
-        (function($) {
+    $.fn.toggleText = function (active, inactive) {
+        return this.text(this.text() === active ? inactive : active);
+    };
 
-            clearInterval(readyStateCheck);
+    // Add a button to each file-actions container.
+    $(".file-actions .btn:contains('View')").before(toggleButton);
 
-            let toggleButton = $('<button>', {
-                text: 'Collapse',
-                class: 'btn btn-sm git-companion__toggle-blob-wrapper'
-            });
+    // Attach event listener to the buttons.
+    $('.git-companion__toggle-blob-wrapper').click(event => {
+        $(event.target)
+            .toggleText('Collapse', 'Expand')
+            .closest('.file-header').next('.blob-wrapper, .render-wrapper').toggle();
+    });
 
-            // Add a button to each file-actions container.
-            $(".file-actions .btn:contains('View')").before(toggleButton);
-
-            // Attach event listener to the buttons.
-            $('.git-companion__toggle-blob-wrapper').click(event => {
-                let $button = $(event.target);
-
-                // Toggle the text between 'Expand' and 'Collapse'.
-                $button.text($button.text() === 'Expand' ? 'Collapse' : 'Expand');
-
-                // Toggle the content or media container.
-                $button.closest('.file-header').next('.blob-wrapper, .render-wrapper').toggle();
-            });
-
-        })(jQuery);
-
-    }, 10);
-
-});
+})(jQuery);

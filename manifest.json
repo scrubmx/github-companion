@@ -21,8 +21,8 @@
         "https://github.com/*"
       ],
       "js": [
-        "src/github-companion.js",
-        "src/vendor/jquery-2.2.0.min.js"
+        "src/vendor/jquery-2.2.0.min.js",
+        "src/github-companion.js"
       ]
     }
   ]
